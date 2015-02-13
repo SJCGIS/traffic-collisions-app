@@ -1,15 +1,18 @@
 define({
-  root: ({
-    appTitle: 'Dojo Bootstrap Map',
-    navBasemaps: 'Basemaps',
-    navAbout: 'About',
-    modalAboutTitle: 'About',
-    modalAboutContent: 'The goal of this application boilerplate is to demonstrate how to build a mapping application that utilizes the best parts of Dojo (AMD modules, classes and widgets, promises, i18n, routing, etc) along with the responsive UI of Bootstrap.',
-    modalAboutMoreInfo: 'More...'
-  }),
-  fr: true,
-  es: true,
-  it: true,
-  de: true
-  // TODO: define other locales as needed
+    root: ({
+        appTitle: 'Traffic Collisions',
+        navBasemaps: 'Basemaps',
+        navFilter: 'Filter',
+        navAbout: 'About',
+        modalFilterTitle: 'Filter',
+        modalFilterContent: 'Check the boxes to filter for only those criteria.',
+        modalAboutTitle: 'About',
+        modalAboutContent: 'This web application can shows traffic collisions on public roads in unincorporated San Juan County WA. Collisions can be filtered by island and severity. The application can be used on PCs, tablets or smartphones. Note: Collisions on private roads and within the town of Friday Harbor are not available.',
+        modalAboutMoreInfo: 'More...'
+    }),
+    fr: true,
+    es: true,
+    it: true,
+    de: true
+    // TODO: define other locales as needed
 });

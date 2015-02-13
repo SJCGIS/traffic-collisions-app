@@ -1,23 +1,19 @@
-# dojo-bootstrap-map-js
+# traffic-collisions-app
 
-An application boilerplate demonstrating how to use the Esri [ArcGIS API for JavaScript](//js.arcgis.com) with [Bootstrap Map](//github.com/Esri/bootstrap-map-js) and [Dojo Bootstrap](//github.com/xsokev/Dojo-Bootstrap) to create a responsive mapping application using [Bootstrap](//getbootstrap.com) components.
+This responsive web application can shows traffic collisions on public roads in unincorporated San Juan County WA. Collisions can be filtered by island and severity.
 
-[View it live](http://esri.github.io/dojo-bootstrap-map-js/)
+Note: Traffic collisions on private roads or within the Town of Friday Harbor are not available.
 
-![App Screenshot](https://raw.githubusercontent.com/Esri/dojo-bootstrap-map-js/master/dojo-bootstrap-map-js.png)
-
-This boilerplate is ideal for mobile applications because it provides the responsive UI of Bootstrap without the overhead of loading all of jQuery. Furthermore, you can run a Dojo build to optimize all of the JavaScript and CSS source code and dependencies to get a roughly 95% reduction in number of requests for scripts and 25% reduction in the size of those scripts.
-
-This application boilerplate demonstrates how to build a mapping application that utilizes the best parts of Dojo (AMD modules, classes and widgets, promises, i18n, custom builds, etc) along with the responsive UI of Bootstrap. For simpler examples of how to get started with [Bootstrap Map](//github.com/Esri/bootstrap-map-js) and [Dojo Bootstrap](//github.com/xsokev/Dojo-Bootstrap), see the [Boostrap Map demo pages](http://esri.github.io/bootstrap-map-js/demo/dojo/getstarted.html).
+This application was forked from Esri's [dojo-bootstrap-map-js](https://github.com/Esri/dojo-bootstrap-map-js) repository.
 
 ## Instructions
 
-By default, this boilerplate assumes you will want to work from local copies of all dependencies so that you can create a custom build. However, you can also work off of remotely hosted (CDN) dependencies by using `nobuild.html`.
+By default, this application assumes you will want to work from local copies of all dependencies so that you can create a custom build. However, you can also work off of remotely hosted (CDN) dependencies by using `index.html`.
 
 ### Quick Start
 
-1. [Download](https://github.com/Esri/dojo-bootstrap-map-js/archive/master.zip) or [Fork and clone the repo](https://help.github.com/articles/fork-a-repo)
-2. Make sure the `dojo-bootstrap-map-js` folder is served via your local web server
+1. [Download](https://github.com/sjcgis/traffic-collisions-app/archive/master.zip) or [Fork and clone the repo](https://help.github.com/articles/fork-a-repo)
+2. Make sure the `traffic-collisions-app` folder is served via your local web server
 3. Load `src/index.html` in your browser
 
 ### Downloading Dependencies and Building
@@ -60,7 +56,7 @@ Find a bug or want to request a new feature?  Please let us know by submitting a
 Anyone and everyone is welcome to contribute.
 
 ## Licensing
-Copyright 2012 Esri
+Copyright 2015 San Juan County GIS
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
