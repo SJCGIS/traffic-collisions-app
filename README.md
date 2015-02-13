@@ -40,6 +40,7 @@ You may want to run `grunt clean:deploy` to remove all uncompressed javascript a
 
 ## Resources
 
+* [Dojo Boostrap Map](//github.com/Esri/dojo-bootstrap-map-js)
 * [Bootstrap Map](//github.com/Esri/bootstrap-map-js)
 * [Dojo Bootstrap](//github.com/xsokev/Dojo-Bootstrap)
 * [ArcGIS API for JavaScript](//js.arcgis.com)
