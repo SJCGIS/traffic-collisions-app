@@ -96,7 +96,7 @@ define([
             }
             if (criteria.severity) {
                 filter = this._formSqlInQueryFromArray(criteria.severity);
-                filters.push('Sev_ IN (' + filter + ')');
+                filters.push('SEVERITY IN (' + filter + ')');
             }
             return filters.join(' AND ');
         },
@@ -108,7 +108,11 @@ define([
 
             var itemFilter = [];
             array.map(itemArray, function(item) {
-                itemFilter.push('\'' + item + '\'');
+                if (isNaN(item)) {
+                    itemFilter.push('\'' + item + '\'');
+                } else {
+                    itemFilter.push(item);
+                }
             });
             return itemFilter;
         }

@@ -67,7 +67,7 @@ define([
                     };
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Sev_ IN (\'1\')');
+                    expect(actual).toEqual('SEVERITY IN (1)');
                 });
                 it('creates definition query for multiple collision types', function(){
                     var criteria = {
@@ -75,7 +75,7 @@ define([
                     };
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Sev_ IN (\'1\',\'3\')');
+                    expect(actual).toEqual('SEVERITY IN (1,3)');
                 });
             });
             describe('multiple columns of criteria', function() {
@@ -86,7 +86,7 @@ define([
                     };
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Island IN (\'Orcas\') AND Sev_ IN (\'3\')');
+                    expect(actual).toEqual('Island IN (\'Orcas\') AND SEVERITY IN (3)');
                 });
                 it('creates definition query for multiple columns of multiple types', function(){
                     var criteria = {
@@ -95,7 +95,7 @@ define([
                     };
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Island IN (\'Lopez\',\'San Juan\') AND Sev_ IN (\'2\',\'3\')');
+                    expect(actual).toEqual('Island IN (\'Lopez\',\'San Juan\') AND SEVERITY IN (2,3)');
                 });
             });
         });
@@ -167,7 +167,7 @@ define([
                 });
                 it('should publish a specific filter topic', function(){
                     widget.filter();
-                    var expression = 'Island IN (\'Orcas\',\'San Juan\') AND Sev_ IN (\'2\')';
+                    var expression = 'Island IN (\'Orcas\',\'San Juan\') AND SEVERITY IN (2)';
                     expect(topicSpies.filterCompleted).toHaveBeenCalledWith(expression);
                 });
             });
