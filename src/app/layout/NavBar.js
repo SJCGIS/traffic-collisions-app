@@ -1,15 +1,12 @@
 define([
-    'app/widgets/FilterContainer',
-
-    'dojo/_base/array',
     'dojo/_base/declare',
     'dojo/query',
     'dojo/touch',
     'dojo/topic',
+    'dojo/on',
 
     'dijit/_WidgetBase',
     'dijit/_TemplatedMixin',
-    'dijit/_WidgetsInTemplateMixin',
 
     'dojo/text!./templates/NavBar.html',
     'dojo/i18n!./nls/strings',
@@ -18,28 +15,19 @@ define([
     'dojo-bootstrap/Dropdown',
     'dojo-bootstrap/Modal'
 ], function(
-    FilterContainer, array,
-    declare, query, touch, topic,
+    declare, query, touch, topic, on,
     _WidgetBase, _TemplatedMixin,
-    _WidgetsInTemplateMixin,
     template, strings
 ) {
 
-    return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTemplateMixin], {
+    return declare([_WidgetBase, _TemplatedMixin], {
         templateString: template,
         strings: strings,
-        widgetsInTemplate: true,
 
-        map: null,
-        layerIds: [],
-        childWidgets: null,
-        
-        constructor: function() {
-            // summary: 
-            //   sets up properties for widget
-            console.log('app.layout.NavBar::constructor', arguments);
-
-            this.childWidgets = [];
+        _setTitleAttr: function(newTitle) {
+            this.title = newTitle;
+            this.titleNode.innerHTML = this.title;
+            window.document.title = this.title;
         },
 
         postCreate: function() {
@@ -47,60 +35,53 @@ define([
             //  Overrides method of same name in dijit._Widget.
             //
             console.log('app.layout.NavBar::postCreate', arguments);
-
-            this.childWidgets.push( 
-                new FilterContainer({
-                    map: this.map,
-                    layerIds: this.layerIds
-                }, this.filterNode)
-            );
             
             this.inherited(arguments);
+            this.set ('title', strings.appTitle);
             this._attachEventHandlers();
         },
 
         _attachEventHandlers: function() {
-            var _this = this;
+
+            console.log('app.layout.NavBar::_attachEventHandlers', arguments);
+
+            var self = this;
+            // toggle sidebar
+            this.own(on(this.sidebarToggleButton, touch.press, function(e) {
+                topic.publish('sidebar/toggle');
+                self._hideDropdownNav(e);
+            }));
             // change basemap
             query('.basemap-list li', this.domNode).on(touch.press, function(e) {
                 e.preventDefault();
                 topic.publish('basemap/set', {
                     basemap: e.target.text
                 });
-                _this._hideDropdownNav(e);
+                self._hideDropdownNav(e);
             });
-            // show filter container modal
+            // show filter modal
             query('a[href="#filter"]', this.domNode).on(touch.press, function(e) {
                 e.preventDefault();
-                query('.filter-modal').modal('show');
-                _this._hideDropdownNav(e);
+                topic.publish('filter/show');
+                self._hideDropdownNav(e);
             });
+            
             // show about modal
             query('a[href="#about"]', this.domNode).on(touch.press, function(e) {
                 e.preventDefault();
-                query('.about-modal').modal('show');
-                _this._hideDropdownNav(e);
+                topic.publish('about/show');
+                self._hideDropdownNav(e);
             });
         },
 
         _hideDropdownNav: function(e) {
             // hide nav dropdown on mobile
+            console.log('app.layout.NavBar::_hideDropdownNav', arguments);
+            
             if (query('.navbar-collapse.in', this.domNode).length > 0) {
                 e.stopPropagation();
-                query('.navbar-toggle', this.domNode)[0].click();
+                this.collapseMenuToggleButton.click();
             }
-        },
-        startup: function() {
-            // summary: 
-            //    starts up all child widgets defined in postCreate
-            //
-            console.log('app.layout.NavBar::startup', arguments);
-
-            var that = this;
-            array.forEach(this.childWidgets, function(widget) {
-                that.own(widget);
-                widget.startup();
-            });
         }
     });
 });

@@ -1,12 +1,13 @@
-define(['esri/InfoTemplate'], function(InfoTemplate) {
+define(['esri/InfoTemplate', 'dojo/i18n!./layout/nls/strings'], function(InfoTemplate, strings) {
     return {
-        map: {
-            mapOptions: {
+        mapControls: {
+            options: {
                 id: 'map'
                 ,scrollWheelZoom: true
                 ,basemap: 'gray'
                 ,center: [-123.0, 48.6]
                 ,zoom: 10
+                ,sliderPosition: 'bottom-right'
             },
             operationalLayers: [{
                 type: 'feature',
@@ -20,6 +21,9 @@ define(['esri/InfoTemplate'], function(InfoTemplate) {
                     mode: 0
                 }
             }],
+
+            legendNodeId: 'mapLegend',
+
             widgets: {
                 scalebar: {
                     // see https://developers.arcgis.com/javascript/jsapi/scalebar-amd.html#scalebar1
@@ -40,9 +44,15 @@ define(['esri/InfoTemplate'], function(InfoTemplate) {
                 }
             }
         },
-        navBar: {
-            moreInfoUrl: 'https://github.com/Esri/dojo-bootstrap-map-js',
+
+        // filter modal
+        filterModal: {
             layerIds: ['collisions']
+        },
+
+        // about modal
+        aboutModal: {
+            moreInfoUrl: 'https://github.com/Esri/dojo-bootstrap-map-js'
         }
     };
 });

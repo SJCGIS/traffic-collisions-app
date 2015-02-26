@@ -1,6 +1,6 @@
 define([
-    'widgets/config',
-    'widgets/FilterControls',
+    'app/widgets/config',
+    'app/widgets/FilterControls',
 
     'dojo/dom-construct',
     'dojo/query',
@@ -140,10 +140,10 @@ define([
                 };
                 spyOn(topicSpies, 'filterCompleted');
                 spyOn(topicSpies, 'resetCompleted');
-                topic.subscribe(config.topics.search.filter, function(data) {
+                topic.subscribe('filter/filter', function(data) {
                     topicSpies.filterCompleted(data.expression);
                 });
-                topic.subscribe(config.topics.search.reset, topicSpies.resetCompleted);                
+                topic.subscribe('filter/reset', topicSpies.resetCompleted);                
             });
             
             describe('filter button', function(){

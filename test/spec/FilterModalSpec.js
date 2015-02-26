@@ -1,5 +1,5 @@
 define([
-    'widgets/FilterContainer',
+    'app/layout/FilterModal',
 
     'esri/map',
     'esri/layers/FeatureLayer',
@@ -19,7 +19,7 @@ define([
     query,
     win
 ) {
-    describe('FilterContainer', function() {
+    describe('FilterModal', function() {
         var map, fLayer1, fLayer2;
         var widget;
         var destroy = function (widget) {
@@ -55,34 +55,11 @@ define([
         });
 
         describe('Sanity', function() {
-            it('should create a FilterContainer', function() {
+            it('should create a FilterModal', function() {
                 expect(widget).toEqual(jasmine.any(WidgetUnderTest));
             });
         });
-        describe('setting definition expressions', function() {
-            it('should set a definition expression on a single layer', function() {
-                var filter = {};
-                filter.expression = 'Island IN (\'Orcas\')';
-                widget.setDefExp(filter);
-                expect(fLayer1.getDefinitionExpression()).toEqual(filter.expression);
-            });
-
-            it('should set a definition expression on multiple layers', function() {
-                var filter = {};
-                filter.expression = 'Island IN (\'Orcas\')';
-                widget.layerIds.push('mySecondLayer');
-                widget.setDefExp(filter);
-                expect(fLayer1.getDefinitionExpression()).toEqual(filter.expression);
-                expect(fLayer2.getDefinitionExpression()).toEqual(filter.expression);
-            });
-            // it('should filter by selected island', function() {
-            //     var orcasCheck = query('input[type="checkbox"][value="Orcas"]', widget.domNode)[0];
-            //     var filterButton = query('button[id="filter"]', widget.domNode)[0];
-            //     orcasCheck.checked = true;
-            //     expect(orcasCheck.checked).toBeTruthy();
-            //     expect(filterButton).toBeDefined();
-            //     expect(fLayer.getDefinitionExpression()).toEqual('Island IN (\'Orcas\')');
-        });
     });
 });
+
 

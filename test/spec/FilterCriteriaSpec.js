@@ -1,5 +1,5 @@
 define([
-    'widgets/FilterCriteria',
+    'app/widgets/FilterCriteria',
 
     'dojo/dom-class',
     'dojo/dom-construct',

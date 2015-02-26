@@ -1,5 +1,5 @@
 define([
-    'widgets/config',
+    'app/widgets/config',
     
     'dojo/text!./templates/FilterCriteria.html',
 
@@ -97,6 +97,8 @@ define([
             // summary:
             //     sets the criteria object from the data
             //     ingredients
+
+            console.log('app.widgets.FilterCriteria::_setData', arguments);
 
             this.set('data', {
                 ingredients: ingredients

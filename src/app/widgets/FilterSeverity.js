@@ -3,7 +3,7 @@ define([
 
     'dojo/_base/declare',
 
-    'widgets/FilterCriteria'
+    'app/widgets/FilterCriteria'
 ], function(
     template,
 

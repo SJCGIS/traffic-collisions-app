@@ -19,38 +19,61 @@
         <!-- get app styles locally -->
         <link rel="stylesheet" href="app/resources/app.css">
 
-        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!--[if lt IE 9]>
-          <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
-          <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-          <![endif]-->
-    </head>
-    <body class="claro">
-        <div id="navBarNode"></div>
-        <div id="mapNode"></div>
-        <script>
-         var path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
-         window.dojoConfig = {
-             async: true,
-             // load dependency packages from CDN instead of locally
-                 packages: [
-                     {
-                         name: 'app',
-                         location: path + '/app'
-                     }, {
-                         name: 'widgets',
-                         location: path + '/app/widgets'
-                     },{
-                         name: 'dojo-bootstrap',
-                         location: '//rawgit.com/xsokev/Dojo-Bootstrap/master'
-                     }, {
-                         name: 'bootstrap-map-js',
-                         location: '//esri.github.io/bootstrap-map-js/src/'
-                     }
-                 ]
-         };
-        </script>
-        <script src="//js.arcgis.com/3.12"></script>
-        <script>require([ 'app/main' ]);</script>
-    </body>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <!-- top nav -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div id="navBar"></div>
+    </div>
+    <div class="container-fluid container-map">
+      <div class="row row-map">
+        <!-- the map -->
+        <div class="col-xs-12 col-sm-9 col-sm-push-3 col-lg-10 col-lg-push-2 col-map">
+          <div id="mapControls"></div>
+        </div>
+        <!-- responsive sidebar -->
+        <div class="col-xs-12 col-sm-3 col-sm-pull-9 col-lg-2 col-lg-pull-10">
+          <div id="sidebar">
+            <h4>Legend</h4>
+             <div id="mapLegend"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- filter modal -->
+    <div class="modal fade filter-modal" style="display: none;" aria-hidden="true">
+        <div id="filterModal"></div>
+    </div>
+    <!-- about modal -->
+    <div class="modal fade about-modal" style="display: none;" aria-hidden="true">
+      <div id="aboutModal"></div>
+    </div>
+    <script>
+     var path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+      window.dojoConfig = {
+        async: true,
+        // load dependency packages from CDN instead of locally
+        packages: [
+          {
+            name: 'app',
+            location: path + '/app'
+          }, {
+            name: 'dojo-bootstrap',
+            location: '//rawgit.com/xsokev/Dojo-Bootstrap/master'
+          }, {
+            name: 'bootstrap-map-js',
+            location: '//esri.github.io/bootstrap-map-js/src/'
+          }
+        ]
+      };
+    </script>
+    <!-- NOTE: we're not using compact b/c we're using esri/dijit -->
+    <script src="//js.arcgis.com/3.12"></script>
+    <script>require([ 'app/main' ]);</script>
+  </body>
 </html>

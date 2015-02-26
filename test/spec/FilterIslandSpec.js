@@ -1,5 +1,5 @@
 define([
-    'widgets/FilterIsland',
+    'app/widgets/FilterIsland',
     
     'dojo/dom-class',
     'dojo/dom-construct',

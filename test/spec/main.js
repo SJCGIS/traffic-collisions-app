@@ -1,6 +1,7 @@
 var allTestFiles = [];
 // var TEST_REGEXP = /test.*\.js$/;
 var TEST_REGEXP = /.*Spec\.js$/;
+
 Object.keys(window.__karma__.files).forEach(function(file) {
     if (TEST_REGEXP.test(file)) {
         allTestFiles.push(file);
@@ -9,11 +10,11 @@ Object.keys(window.__karma__.files).forEach(function(file) {
 var dojoConfig = {
     packages: [
         {
-            name:"spec",
-            location:"/base/test/spec"
+            name:'spec',
+            location:'/base/test/spec'
         }, {
-            name:"widgets",
-            location:"/base/src/app/widgets"
+            name:'app',
+            location:'/base/src/app'
         }, {
             name: 'esri',
             location: 'http://js.arcgis.com/3.12/esri'

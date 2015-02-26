@@ -1,5 +1,5 @@
 define([
-    'widgets/FilterSeverity',
+    'app/widgets/FilterSeverity',
 
     'dojo/dom-class',
     'dojo/dom-construct',

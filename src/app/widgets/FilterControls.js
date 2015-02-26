@@ -1,5 +1,5 @@
 define([
-    'widgets/config',
+    'app/widgets/config',
     'dojo/text!./templates/FilterControls.html',
 
     'dojo/_base/array',
@@ -57,7 +57,7 @@ define([
             var criteria = this._getFilterIngredients();
             var expression = this._buildDefinitionQueryFromObject(criteria);
             var pubData = {expression: expression};
-            topic.publish(config.topics.search.filter, pubData);
+            topic.publish('filter/filter', pubData);
         },
         reset: function() {
             // summary:
@@ -65,8 +65,8 @@ define([
             //
             console.log('viewer.js.gis.dijit.FilterControls::reset', arguments);
 
-            topic.publish(config.topics.search.filter, '');
-            topic.publish(config.topics.search.reset, {});
+            topic.publish('filter/filter', '');
+            topic.publish('filter/reset', {});
         },
         _getFilterIngredients: function() {
             // summary:
