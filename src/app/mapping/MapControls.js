@@ -73,7 +73,7 @@ define([
       topic.publish('webmap/load', response);
     },
 
-    // init map layers from options instead of
+    // init map layers from options instead of a web map
     _initLayers: function() {
         console.log('app.mapping.MapControls::_initLayers', arguments);
       if (!this.operationalLayers) {
@@ -96,22 +96,26 @@ define([
         }
       }, this);
       require(modules, lang.hitch(this, function() {
+        var layerInfos = [];
         array.forEach(this.operationalLayers, function(operationalLayer) {
           var type = layerTypes[operationalLayer.type];
           if (type) {
-            require(['esri/layers/' + type + 'Layer'], lang.hitch(this, 'initLayer', operationalLayer, layers));
+            require(['esri/layers/' + type + 'Layer'], lang.hitch(this, '_initLayer', operationalLayer, layers, layerInfos));
           }
         }, this);
         this.map.addLayers(layers);
+        this._initLegend(layerInfos);
       }));
     },
 
-    initLayer: function(operationalLayer, layers, LayerClass) {
-
-        console.log('app.mapping.MapControls::initLayer', arguments);
+    _initLayer: function(operationalLayer, layers, layerInfos, LayerClass) {
       var l = new LayerClass(operationalLayer.url, operationalLayer.options);
       // unshift instead of push to keep layer ordering on map intact
       layers.unshift(l);
+      layerInfos.unshift({
+        layer: l,
+        title: operationalLayer.title || l.name
+      });
     },
 
     _initLegend: function(layerInfos) {
@@ -169,6 +173,14 @@ define([
         this.own(this.geocoder.on('select', function(e) {
           domClass.remove(self.geocoder.domNode, 'shown');
         }));
+      }
+    },
+
+    getMapHeight: function() {
+      if(this.map) {
+        return this.map.height;
+      } else {
+        return 0;
       }
     },
 
