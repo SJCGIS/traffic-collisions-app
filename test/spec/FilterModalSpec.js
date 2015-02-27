@@ -4,6 +4,8 @@ define([
     'esri/map',
     'esri/layers/FeatureLayer',
 
+    'dojo/_base/array',
+
     'dojo/dom',
     'dojo/dom-construct',
     'dojo/query',
@@ -13,6 +15,8 @@ define([
 
     Map,
     FeatureLayer,
+
+    array,
 
     dom,
     domConstruct,
@@ -57,6 +61,22 @@ define([
         describe('Sanity', function() {
             it('should create a FilterModal', function() {
                 expect(widget).toEqual(jasmine.any(WidgetUnderTest));
+            });
+        });
+        describe('resetFilters', function() {
+            beforeEach(function() {
+                var checkboxes = query('input[type="checkbox"]', widget.domNode);
+                console.log('There are ' + checkboxes.length + ' checkboxes');
+                array.forEach(checkboxes, function(checkbox){
+                    checkbox.checked = true;
+                });
+                var checkedBoxes = query('input[type="checkbox"]:checked', widget.domNode);
+                console.log('We have ' + checkedBoxes.length + ' checked boxes before the reset');
+            });
+            it('should set all checkboxes to unchecked', function(){
+                widget.resetFilters();
+                var checkedBoxes = query('input[type="checkbox"]:checked', widget.domNode);
+                expect(checkedBoxes.length).toEqual(0);
             });
         });
     });

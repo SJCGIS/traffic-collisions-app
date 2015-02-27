@@ -18,6 +18,7 @@ define(['esri/InfoTemplate', 'dojo/i18n!./layout/nls/strings'], function(InfoTem
                     opacity: 1.0,
                     visible: true,
                     outFields: ['*'],
+                    infoTemplate: new InfoTemplate('Collision', '${*}'),
                     mode: 0
                 }
             }],

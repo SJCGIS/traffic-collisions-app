@@ -26,7 +26,7 @@ define([
             //    Overrides method of same name in dijit._Widget.
             // tags:
             //    private
-            console.log('src.app.FilterIsland::postCreate', arguments);
+            console.log('app.widgets.FilterIsland::postCreate', arguments);
 
             this.inherited(arguments);
         },

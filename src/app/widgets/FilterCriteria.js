@@ -51,7 +51,7 @@ define([
             //    Overrides method of same name in dijit._Widget.
             // tags:
             //    private
-            console.log('src.app.FilterCriteria::postCreate', arguments);
+            console.log('app.widgets.FilterCriteria::postCreate', arguments);
 
             this.setupConnections();
 
@@ -61,7 +61,7 @@ define([
             // summary:
             //    wire events, and such
             //
-            console.log('src.app.FilterCriteria::setupConnections', arguments);
+            console.log('app.widgets.FilterCriteria::setupConnections', arguments);
 
             this.own(
                 on(this.domNode, 'input[type="checkbox"]:change', lang.hitch(this, 'clicked'))
@@ -71,7 +71,7 @@ define([
             // summary:
             //    handle click events
             //    evt: the click event
-            console.log('src.app.FilterCriteria::clicked', arguments);
+            console.log('app.widgets.FilterCriteria::clicked', arguments);
 
             // stop the input event from bubbling
             event.stop(evt);
@@ -82,7 +82,7 @@ define([
             // summary:
             //     gathers the ingredients from the checkboxes
             //
-            console.log('src.app.FilterCriteria::_gatherData', arguments);
+            console.log('app.widgets.FilterCriteria::_gatherData', arguments);
 
             var ingredients = array.map(query('input[type="checkbox"]:checked', this.domNode), function mapCheckboxes(node) {
                 return node.value;

@@ -35,7 +35,7 @@ define([
             //    Overrides method of same name in dijit._Widget.
             // tags:
             //    private
-            console.log('viewer.js.gis.dijit.FilterControls::postCreate', arguments);
+            console.log('app.widgets.FilterControls::postCreate', arguments);
 
             this.setupConnections();
 
@@ -45,14 +45,14 @@ define([
             // summary:
             //    wire events, and such
             //
-            console.log('viewer.js.gis.dijit.FilterControls::setupConnections', arguments);
+            console.log('app.widgets.FilterControls::setupConnections', arguments);
 
         },
         filter: function() {
             // summary:
             //     gathers the filter criteria and sends the request
             //
-            console.log('viewer.js.gis.dijit.FilterControls::filter', arguments);
+            console.log('app.widgets.FilterControls::filter', arguments);
 
             var criteria = this._getFilterIngredients();
             var expression = this._buildDefinitionQueryFromObject(criteria);
@@ -63,7 +63,7 @@ define([
             // summary:
             //     resets the filters and definition query on feature layer
             //
-            console.log('viewer.js.gis.dijit.FilterControls::reset', arguments);
+            console.log('app.widgets.FilterControls::reset', arguments);
 
             topic.publish('filter/filter', '');
             topic.publish('filter/reset', {});
@@ -72,7 +72,7 @@ define([
             // summary:
             //    gets the filter ingredients from the childWidgets array
             //
-            console.log('viewer.js.gis.dijit.FilterControls::_getFilterIngredients', arguments);
+            console.log('app.widgets.FilterControls::_getFilterIngredients', arguments);
 
             var criteria = {};
 
@@ -86,7 +86,7 @@ define([
             // summary:
             //    get the filter criteria and build a definition query
             //
-            console.log('viewer.js.gis.dijit.FilterControls::_buildDefinitionQueryFromObject', arguments);
+            console.log('app.widgets.FilterControls::_buildDefinitionQueryFromObject', arguments);
 
             var filters = [], filter;
 
@@ -104,7 +104,7 @@ define([
             // summary:
             //     forma a SQL IN query from an array of strings
             //
-            console.log('viewer.js.gis.dijit.FilterControls::_formSqlInQueryFromArray', arguments);
+            console.log('app.widgets.FilterControls::_formSqlInQueryFromArray', arguments);
 
             var itemFilter = [];
             array.map(itemArray, function(item) {
