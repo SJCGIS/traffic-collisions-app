@@ -21,7 +21,7 @@ define([
         };
 
         beforeEach(function() {
-            widget = new WidgetUnderTest({dataName: 'criteria'}, domConstruct.create('div', null, document.body));
+            widget = new WidgetUnderTest({field: 'Field'}, domConstruct.create('div', null, document.body));
         });
 
         afterEach(function() {
@@ -40,6 +40,7 @@ define([
                 widget._gatherData();
                 var actual = widget.get('data');
                 expect(actual).toEqual({
+                    field: 'Field',
                     ingredients: ['Item1']
                 });
             });
@@ -50,6 +51,7 @@ define([
                 widget._gatherData();
                 var actual = widget.get('data');
                 expect(actual).toEqual({
+                    field: 'Field',
                     ingredients: ['Item1','Item2']
                 });
             });
@@ -58,6 +60,7 @@ define([
                 widget._gatherData();
                 var actual = widget.get('data');
                 expect(actual).toEqual({
+                    field: 'Field',
                     ingredients: null
                 });
             });

@@ -44,35 +44,39 @@ define([
             });
             describe('island criteria', function() {
                 it('creates definition query for one island', function() {
-                    var criteria = {
-                        islands: ['Orcas']
-                    };
+                    var criteria = [{
+                        field: 'ISLAND',
+                        ingredients: ['Orcas']
+                    }];
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Island IN (\'Orcas\')');
+                    expect(actual).toEqual('ISLAND IN (\'Orcas\')');
                 });
                 it('creates definition query for multiple islands', function() {
-                    var criteria = {
-                        islands: ['San Juan','Orcas']
-                    };
+                    var criteria = [{
+                        field: 'ISLAND',
+                        ingredients: ['San Juan','Orcas']
+                    }];
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Island IN (\'San Juan\',\'Orcas\')');
+                    expect(actual).toEqual('ISLAND IN (\'San Juan\',\'Orcas\')');
                 });
             });
             describe('collision type criteria', function() {
                 it('creates definition query for one collision type', function() {
-                    var criteria = {
-                        severity: ['1']
-                    };
+                    var criteria = [{
+                        field: 'SEVERITY',
+                        ingredients: ['1']
+                    }];
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
                     expect(actual).toEqual('SEVERITY IN (1)');
                 });
                 it('creates definition query for multiple collision types', function(){
-                    var criteria = {
-                        severity: ['1','3']
-                    };
+                    var criteria = [{
+                        field: 'SEVERITY',
+                        ingredients: ['1','3']
+                    }];
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
                     expect(actual).toEqual('SEVERITY IN (1,3)');
@@ -80,22 +84,28 @@ define([
             });
             describe('multiple columns of criteria', function() {
                 it('creates definition query for multiple columns of single type', function() {
-                    var criteria = {
-                        islands: ['Orcas'],
-                        severity: ['3']
-                    };
+                    var criteria = [{
+                        field: 'ISLAND',
+                        ingredients: ['Orcas']
+                    },{
+                        field: 'SEVERITY',
+                        ingredients: ['3']
+                    }];
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Island IN (\'Orcas\') AND SEVERITY IN (3)');
+                    expect(actual).toEqual('ISLAND IN (\'Orcas\') AND SEVERITY IN (3)');
                 });
                 it('creates definition query for multiple columns of multiple types', function(){
-                    var criteria = {
-                        islands: ['Lopez', 'San Juan'],
-                        severity: ['2','3']
-                    };
+                    var criteria = [{
+                        field: 'ISLAND',
+                        ingredients: ['Lopez', 'San Juan']
+                    },{
+                        field: 'SEVERITY',
+                        ingredients: ['2','3']
+                    }];
 
                     var actual = widget._buildDefinitionQueryFromObject(criteria);
-                    expect(actual).toEqual('Island IN (\'Lopez\',\'San Juan\') AND SEVERITY IN (2,3)');
+                    expect(actual).toEqual('ISLAND IN (\'Lopez\',\'San Juan\') AND SEVERITY IN (2,3)');
                 });
             });
         });
@@ -104,27 +114,37 @@ define([
                 widget.childWidgets = [
                     new Stateful({
                         data: {
-                            a: 1
+                            field: 'Field1',
+                            ingredients: 1
                         }
                     }),
                     new Stateful({
                         data: {
-                            b: 2
+                            field: 'Field2',
+                            ingredients: 2
                         }
                     }),
                     new Stateful({
                         data: {
-                            c: 3
+                            field: 'Field3',
+                            ingredients: 3
                         }
                     })
                 ];
 
                 var actual = widget._getFilterIngredients();
-                expect(actual).toEqual({
-                    a: 1,
-                    b: 2,
-                    c: 3
-                });
+                expect(actual).toEqual([
+                    {
+                        field: 'Field1',
+                        ingredients: 1
+                    },{
+                        field: 'Field2',
+                        ingredients: 2
+                    },{
+                        field: 'Field3',
+                        ingredients: 3
+                    }
+                ]);
             });            
         });
         describe('topics', function() {
@@ -151,12 +171,14 @@ define([
                     widget.childWidgets = [
                         new Stateful({
                             data: {
-                                islands: ['Orcas', 'San Juan']
+                                field: 'ISLAND',
+                                ingredients: ['Orcas', 'San Juan']
                             }
                         }),
                         new Stateful({
                             data: {
-                                severity: [2]
+                                field: 'SEVERITY',
+                                ingredients: [2]
                             }
                         })
                     ];
@@ -167,7 +189,7 @@ define([
                 });
                 it('should publish a specific filter topic', function(){
                     widget.filter();
-                    var expression = 'Island IN (\'Orcas\',\'San Juan\') AND SEVERITY IN (2)';
+                    var expression = 'ISLAND IN (\'Orcas\',\'San Juan\') AND SEVERITY IN (2)';
                     expect(topicSpies.filterCompleted).toHaveBeenCalledWith(expression);
                 });
             });

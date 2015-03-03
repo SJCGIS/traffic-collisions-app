@@ -74,10 +74,10 @@ define([
             //
             console.log('app.widgets.FilterControls::_getFilterIngredients', arguments);
 
-            var criteria = {};
+            var criteria = [];
 
-            array.forEach(this.childWidgets, function mixinCriteria(widget){
-                lang.mixin(criteria, widget.get('data'));
+            array.forEach(this.childWidgets, function(widget){
+                criteria.push(widget.get('data'));
             }, this);
 
             return criteria;
@@ -90,14 +90,13 @@ define([
 
             var filters = [], filter;
 
-            if (criteria.islands) {
-                filter = this._formSqlInQueryFromArray(criteria.islands);
-                filters.push('Island IN (' + filter + ')');
-            }
-            if (criteria.severity) {
-                filter = this._formSqlInQueryFromArray(criteria.severity);
-                filters.push('SEVERITY IN (' + filter + ')');
-            }
+            array.forEach(criteria, lang.hitch(this, function(crit) {
+                if (crit && crit.ingredients) {
+                    filter = this._formSqlInQueryFromArray(crit.ingredients);
+                    filters.push( crit.field + ' IN (' + filter + ')');
+                }
+            }));
+
             return filters.join(' AND ');
         },
         _formSqlInQueryFromArray: function(itemArray) {

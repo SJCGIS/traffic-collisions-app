@@ -17,27 +17,6 @@ define([
 
         templateString: template,
         baseClass: 'filter-criteria',
-
-        // Properties to be sent into constructor
-        dataName: 'severity',
-
-        postCreate: function() {
-            // summary:
-            //    Overrides method of same name in dijit._Widget.
-            // tags:
-            //    private
-            console.log('app.widgets.FilterSeverity::postCreate', arguments);
-
-            this.inherited(arguments);
-        },
-        _setData: function(ingredients) {
-            // summary:
-            //    sets the criteria object from the data
-            //    ingredients
-
-            this.set('data', {
-                severity: ingredients
-            });
-        }
+        field: 'SEVERITY'
     });
 });

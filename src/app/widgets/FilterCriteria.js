@@ -43,6 +43,7 @@ define([
 
         templateString: template,
         baseClass: 'filter-criteria',
+        field: null,
 
         // Properties to be sent into constructor
 
@@ -101,6 +102,7 @@ define([
             console.log('app.widgets.FilterCriteria::_setData', arguments);
 
             this.set('data', {
+                field: this.field,
                 ingredients: ingredients
             });
         }
