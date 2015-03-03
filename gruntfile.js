@@ -55,30 +55,25 @@ module.exports = function(grunt) {
             options: {
                 nospan: true,
                 livereload: LIVERELOAD_PORT
-            },
+            }
+        },
 
-            source: {
-                files: ['./src/js/**/*.js'],
-                tasks: ['jshint']
+        //Open default browser at the app
+        open: {
+            unbuilt: {
+                path: 'http://localhost:<%= connect.options.port %>/unbuilt.html'
             },
-            livereload:{
-                options: {
-                    livereload:LIVERELOAD_PORT
-                },
-                files:[
-                    './src/js/**/*.js',
-                    './src/**/*.html',
-                    './src/css/**/*.css'
-                ]
+            build: {
+                path: 'http://localhost:<%= connect.options.port %>/'
             }
         },
         esri_slurp: {
             options: {
-                version: '3.11'
+                version: '3.12'
             },
             dev: {
                 options: {
-                    beautify: true
+                    beautify: false
                 },
                 dest: 'src/esri'
             }
@@ -115,47 +110,11 @@ module.exports = function(grunt) {
                 basePath: './src'
             }
         },
-        // this copies over unbuilt.html and replaces
-        // the perl regexp section of build.sh in the dojo boilerplate
-        'string-replace': {
-            unbuilt: {
-                src: './src/unbuilt.html',
-                dest: './dist/index.html',
-                options: {
-                    replacements: [
-                        // remove isDeubug
-                        {
-                            pattern: /isDebug: *true,/,
-                            replacement: ''
-                        },
-                        // strip js comments
-                        {
-                            pattern: /\s+\/\/.*$/gm,
-                            replacement: ''
-                        },
-                        // replace newlines w/ whitespace
-                        {
-                            pattern: /\n/g,
-                            replacement: ' '
-                        },
-                        // strip html comments
-                        {
-                            pattern: /<!--[\s\S]*?-->/g,
-                            replacement: ''
-                        },
-                        // collapse whitespace
-                        {
-                            pattern: /\s+/g,
-                            replacement: ' '
-                        }
-                    ]
+        processhtml: {
+            build: {
+                files: {
+                    'dist/index.html': ['src/index.html']
                 }
-            }
-        },
-        copy: {
-            unbuilt: {
-                src: './src/unbuilt.html',
-                dest: './dist/unbuilt.html'
             }
         },
         'gh-pages': {
@@ -182,8 +141,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-esri-slurp');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-dojo');
-    grunt.loadNpmTasks('grunt-string-replace');
-    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-processhtml');
     grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', ['serve']);
@@ -202,7 +160,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('slurp', ['clean:slurp', 'esri_slurp:dev']);
 
-    grunt.registerTask('build', ['jshint', 'clean:build', 'dojo', 'string-replace']);
+    grunt.registerTask('build', ['jshint', 'clean:build', 'dojo', 'processhtml']);
 
     grunt.registerTask('deploy', ['gh-pages']);
 };
