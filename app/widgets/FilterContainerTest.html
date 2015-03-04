@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+    <title>FilterContainer Tests</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.10/js/esri/css/esri.css">
+    <style>
+        @import url('tests.css');
+        @import url('resources/FilterContainer.css');
+
+        /* override default styles here */
+    </style>
+</head>
+  <body>
+    <div id="map"></div>
+    <div id="widgetContainer">
+        <div id="widgetNode"></div>
+    </div>
+    <script src="http://js.arcgis.com/3.10/"></script>
+    <script type="text/javascript">
+        var testsUrl = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/')) + '/';
+        var widgetUnderTest;
+        var map;
+
+        require(["esri/map",
+            "FilterContainer.js",
+            "dojo/domReady!"
+        ], function(Map, Module) {
+
+            // init map
+            map = new Map("map",{
+                basemap: "topo",
+                center: [-123.45,48.35],
+                zoom: 13,
+                sliderStyle: "small"
+            });
+
+            // init widget
+            widgetUnderTest = new Module({
+            }, 'widgetNode');
+            widgetUnderTest.startup();
+        });
+    </script>
+</body>
+</html>
