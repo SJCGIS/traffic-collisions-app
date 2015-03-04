@@ -46,6 +46,9 @@ var profile = {
     'xstyle',
     'dojo-bootstrap',
     {
+      name: 'spin',
+      location: 'spin.js'
+    }, {
       name: 'bootstrap-map-js',
       location: 'bootstrap-map-js/src'
     }

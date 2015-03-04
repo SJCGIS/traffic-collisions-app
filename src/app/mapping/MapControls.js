@@ -3,6 +3,7 @@ define([
   'dojo/_base/array',
   'dojo/_base/lang',
   'dojo/dom-class',
+  'dojo/on',
   'dojo/topic',
 
   'dijit/_WidgetBase',
@@ -19,12 +20,14 @@ define([
 
   'bootstrap-map-js/js/bootstrapmap',
 
+  'spin-js/spin',
+
   'dojo/text!./templates/Map.html'
 ], function(
-  declare, array, lang, domClass, topic,
+  declare, array, lang, domClass, on, topic,
   _WidgetBase, _TemplatedMixin,
   Map, Scalebar, WebTiledLayer, HomeButton, LocateButton, Geocoder, arcgisUtils, Legend,
-  BootstrapMap,
+  BootstrapMap, Spinner,
   template) {
   return declare([_WidgetBase, _TemplatedMixin], {
     templateString: template,
@@ -35,6 +38,57 @@ define([
       // NOTE: BootstrapMap needs to work off an id
       this.mapNode.id = this.id + 'Map';
       this._initMap();
+      this.setupConnections();
+    },
+    setupConnections: function() {
+        // summary:
+        // wire events and the like
+        //
+        console.log('app.mapping.MapControls::setupConnections', arguments);
+        
+        on(this.map, 'update-start', lang.hitch(this, 'showSpinner'));
+        on(this.map, 'update-end', lang.hitch(this, 'hideSpinner'));
+    },
+    showSpinner: function() {
+        // summary:
+        // sets up and shows the spinner
+        //
+        console.log('app.mapping.MapControls::showSpinner', arguments);
+        
+        var opts = {
+            lines: 9, // The number of lines to draw
+            length: 4, // The length of each line
+            width: 3, // The line thickness
+            radius: 4, // The radius of the inner circle
+            corners: 1, // Corner roundness (0..1)
+            rotate: 0, // The rotation offset
+            direction: 1, // 1: clockwise, -1: counterclockwise
+            color: '#000', // #rgb or #rrggbb or array of colors
+            speed: 1, // Rounds per second
+            trail: 60, // Afterglow percentage
+            shadow: false, // Whether to render a shadow
+            hwaccel: true, // Whether to use hardware acceleration
+            className: 'spinner', // The CSS class to assign to the spinner
+            zIndex: 100, // The z-index (defaults to 2000000000)
+            top: '50%', // Top position relative to parent in px
+            left: '50%' // Left position relative to parent in px
+        };
+
+        if(!this.spinner) {
+            this.spinner = new Spinner(opts).spin(this.spinnerNode);
+        } else {
+            if(!this.spinner.el) {
+                // only start spinner if not already started
+                this.spinner.spin(this.spinnerNode);
+            }
+        }
+    },
+    hideSpinner: function() {
+        // summary:
+        // hides the spinner 
+        //
+        console.log('app.mapping.MapControls::hideSpinner', arguments);
+        this.spinner.stop();
     },
 
     // initalize map from configuration parameters
