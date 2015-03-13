@@ -10,6 +10,6 @@ src/put-selector
 src/xstyle
 src/bootstrap-map-js
 src/dojo-bootstrap
-src/spin.js
+src/spinjs
 dist
 .grunt

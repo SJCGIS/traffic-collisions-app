@@ -20,7 +20,7 @@ define([
 
   'bootstrap-map-js/js/bootstrapmap',
 
-  'spin-js/spin',
+  'spin/spin',
 
   'dojo/text!./templates/Map.html'
 ], function(

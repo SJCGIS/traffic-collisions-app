@@ -63,6 +63,12 @@ module.exports = function(grunt) {
             },
             dev: {
                 options: {
+                    beautify: true
+                },
+                dest: 'src/esri'
+            },
+            prod: {
+                options: {
                     beautify: false
                 },
                 dest: 'src/esri'
@@ -72,7 +78,7 @@ module.exports = function(grunt) {
         clean: {
             build: ['dist'],
             deploy: ['dist/**/*.consoleStripped.js','dist/**/*.uncompressed.js','dist/**/*.js.map'],
-            bower: ['src/bootstrap-map-js', 'src/dijit', 'src/dojo', 'src/dojo-bootstrap', 'src/dojox', 'src/put-selector', 'src/spin.js', 'src/util', 'src/xstyle'],
+            bower: ['src/bootstrap-map-js', 'src/dijit', 'src/dojo', 'src/dojo-bootstrap', 'src/dojox', 'src/put-selector', 'src/spinjs', 'src/util', 'src/xstyle'],
             slurp: ['src/esri']
         },
         // dojo build configuration, mainly taken from dojo boilerplate
@@ -153,4 +159,10 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['jshint', 'clean:build', 'dojo', 'processhtml']);
 
     grunt.registerTask('deploy', ['gh-pages']);
+
+    grunt.registerTask('travis', [
+        'if_missing:esri_slurp:prod',
+        'test',
+        'build:prod'
+    ]);
 };
