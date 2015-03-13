@@ -162,7 +162,7 @@ module.exports = function(grunt) {
     grunt.registerTask('deploy', ['gh-pages']);
 
     grunt.registerTask('travis', [
-        'if_missing:esri_slurp:prod',
+        'if-missing:esri_slurp:prod',
         'test',
         'build:prod'
     ]);
