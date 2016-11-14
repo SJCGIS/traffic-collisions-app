@@ -164,6 +164,6 @@ module.exports = function(grunt) {
     grunt.registerTask('travis', [
         'if-missing:esri_slurp:prod',
         'test',
-        'build:prod'
+        'build'
     ]);
 };
